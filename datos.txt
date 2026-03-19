@@ -1,4 +1,5 @@
 equipo=TTO6230
+Serial=2550178909TZH
 falla=Tarjeta principal de control
 accion=Mantenimetno de actuador
 estado=Trabajando en lienas de produccion
