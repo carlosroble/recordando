@@ -11,8 +11,13 @@ jobs:
       - name: Clonar repositorio
         uses: actions/checkout@v4
 
+      - name: Instalar dependencias
+        run: pip install reportlab
+
       - name: Ejecutar script Python
         run: python informe.py
 
+      - name: Mostrar PDF
+        run: ls
       - name: Mostrar informe
         run: cat informe.txt
