@@ -1,12 +1,18 @@
-name: Mi primer automatizacion
+name: Generar informe automatico
 
 on:
   push:
 
 jobs:
-  saludo:
+  informe:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Mostrar mensaje
-        run: echo "Hola Carlos, tu automatizacion funciona 🚀"
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Ejecutar script Python
+        run: python informe.py
+
+      - name: Mostrar informe
+        run: cat informe.txt
