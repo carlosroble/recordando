@@ -1,9 +1,12 @@
 from datetime import datetime
 
-equipo = "CIJ1580"
-falla = "Sensor en mal estado"
-accion = "Limpieza interna y ajuste"
-estado = "Equipo operativo"
+# Leer datos desde archivo
+datos = {}
+
+with open("datos.txt") as f:
+    for linea in f:
+        clave, valor = linea.strip().split("=")
+        datos[clave] = valor
 
 fecha = datetime.now().strftime("%Y-%m-%d")
 
@@ -11,18 +14,22 @@ informe = f"""
 INFORME TECNICO
 
 Fecha: {fecha}
-Equipo: {equipo}
+Equipo: {datos['equipo']}
 
 Falla detectada:
-{falla}
+{datos['falla']}
 
 Acciones realizadas:
-{accion}
+{datos['accion']}
 
 Estado final:
-{estado}
+{datos['estado']}
 """
 
+with open("informe.txt", "w") as f:
+    f.write(informe)
+
+print("Informe generado correctamente")
 with open("informe.txt", "w") as f:
     f.write(informe)
 
