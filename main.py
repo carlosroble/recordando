@@ -1,24 +1,24 @@
-# main.py
-
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 
-# Crear documento
+# Leer archivo txt
+datos = {}
+
+with open("datos.txt", "r") as archivo:
+    for linea in archivo:
+        clave, valor = linea.strip().split("=")
+        datos[clave.strip()] = valor.strip()
+
+# Crear PDF
 doc = SimpleDocTemplate("reporte.pdf")
 styles = getSampleStyleSheet()
 
 contenido = []
 
-# Datos (puedes luego automatizar esto)
-equipo = "Videojet CIJ1580"
-falla = "Cabezal de impresión"
-accion = "Ajuste de galgas"
-estado = "Fuera de línea de producción"
-
 contenido.append(Paragraph("INFORME TECNICO", styles['Title']))
-contenido.append(Paragraph(f"Equipo: {equipo}", styles['Normal']))
-contenido.append(Paragraph(f"Falla: {falla}", styles['Normal']))
-contenido.append(Paragraph(f"Acción: {accion}", styles['Normal']))
-contenido.append(Paragraph(f"Estado: {estado}", styles['Normal']))
+contenido.append(Paragraph(f"Equipo: {datos['equipo']}", styles['Normal']))
+contenido.append(Paragraph(f"Falla: {datos['falla']}", styles['Normal']))
+contenido.append(Paragraph(f"Acción: {datos['accion']}", styles['Normal']))
+contenido.append(Paragraph(f"Estado: {datos['estado']}", styles['Normal']))
 
 doc.build(contenido)
