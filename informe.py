@@ -1,6 +1,8 @@
 from datetime import datetime
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
-# Leer datos desde archivo
+# Leer datos
 datos = {}
 
 with open("datos.txt") as f:
@@ -10,7 +12,13 @@ with open("datos.txt") as f:
 
 fecha = datetime.now().strftime("%Y-%m-%d")
 
-informe = f"""
+# Crear PDF
+c = canvas.Canvas("informe.pdf", pagesize=letter)
+
+texto = c.beginText(40, 750)
+texto.setFont("Helvetica", 10)
+
+contenido = f"""
 INFORME TECNICO
 
 Fecha: {fecha}
@@ -26,11 +34,10 @@ Estado final:
 {datos['estado']}
 """
 
-with open("informe.txt", "w") as f:
-    f.write(informe)
+for linea in contenido.split("\n"):
+    texto.textLine(linea)
 
-print("Informe generado correctamente")
-with open("informe.txt", "w") as f:
-    f.write(informe)
+c.drawText(texto)
+c.save()
 
-print("Informe generado correctamente")
+print("PDF generado correctamente")
