@@ -1,46 +1,24 @@
-from datetime import datetime
-from reportlab.pdfgen import canvas
+# main.py
 
-datos = {}
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
 
-with open("datos.txt", encoding="utf-8") as f:
-    for linea in f:
-        linea = linea.strip()
-        if "=" in linea:
-            clave, valor = linea.split("=", 1)
-            datos[clave.strip()] = valor.strip()
+# Crear documento
+doc = SimpleDocTemplate("reporte.pdf")
+styles = getSampleStyleSheet()
 
-fecha = datetime.now().strftime("%Y-%m-%d")
+contenido = []
 
-c = canvas.Canvas("informe.pdf")
-texto = c.beginText(40, 800)
-texto.setFont("Helvetica", 10)
+# Datos (puedes luego automatizar esto)
+equipo = "Videojet CIJ1580"
+falla = "Cabezal de impresión"
+accion = "Ajuste de galgas"
+estado = "Fuera de línea de producción"
 
-contenido = f"""
-INFORME TECNICO
+contenido.append(Paragraph("INFORME TECNICO", styles['Title']))
+contenido.append(Paragraph(f"Equipo: {equipo}", styles['Normal']))
+contenido.append(Paragraph(f"Falla: {falla}", styles['Normal']))
+contenido.append(Paragraph(f"Acción: {accion}", styles['Normal']))
+contenido.append(Paragraph(f"Estado: {estado}", styles['Normal']))
 
-Fecha: {fecha}
-Equipo: {datos.get('equipo', 'No especificado')}
-
-Falla detectada:
-{datos.get('falla', 'No especificado')}
-
-Acciones realizadas:
-{datos.get('accion', 'No especificado')}
-
-Estado final:
-{datos.get('estado', 'No especificado')}
-"""
-
-for linea in contenido.strip().split("\n"):
-    texto.textLine(linea)
-
-c.drawText(texto)
-c.save()
-
-print("PDF generado correctamente")
-
-c.drawText(texto)
-c.save()
-
-print("PDF generado correctamente")
+doc.build(contenido)
