@@ -2,3 +2,4 @@ equipo=TTO6230
 falla=Tarjeta principal de control
 accion=Mantenimetno de actuador
 estado=Trabajando en lienas de produccion
+descripcion= Se realizo ajuste de galgas en el cabezal de impresion, se verifico alineacion y se realizaron pruebas de impresion obteniendo resultados satisfactorios
