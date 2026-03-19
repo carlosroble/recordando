@@ -1,4 +1,4 @@
-equipo=CIJ1580
-falla=Sensor en mal estado
-accion=Limpieza interna y ajuste
-estado=Equipo operativo
+equipo= TTO6330
+falla= cabezal de impresion
+accion= Ajuste de galgas
+estado= Fuera de lineas de produccion
