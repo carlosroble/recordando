@@ -1,0 +1,4 @@
+equipo=CIJ1580
+falla=Sensor en mal estado
+accion=Limpieza interna y ajuste
+estado=Equipo operativo
