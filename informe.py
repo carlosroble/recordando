@@ -6,10 +6,9 @@ datos = {}
 with open("datos.txt", encoding="utf-8") as f:
     for linea in f:
         linea = linea.strip()
-        if not linea:
-            continue
-        clave, valor = linea.split("=", 1)
-        datos[clave.strip()] = valor.strip()
+        if "=" in linea:
+            clave, valor = linea.split("=", 1)
+            datos[clave.strip()] = valor.strip()
 
 fecha = datetime.now().strftime("%Y-%m-%d")
 
@@ -22,10 +21,13 @@ INFORME TECNICO
 
 Fecha: {fecha}
 Equipo: {datos.get('equipo', 'No especificado')}
+
 Falla detectada:
 {datos.get('falla', 'No especificado')}
+
 Acciones realizadas:
 {datos.get('accion', 'No especificado')}
+
 Estado final:
 {datos.get('estado', 'No especificado')}
 """
