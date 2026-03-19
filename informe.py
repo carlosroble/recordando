@@ -1,41 +1,42 @@
 from datetime import datetime
-from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 
-# Leer datos
 datos = {}
 
-with open("datos.txt") as f:
+with open("datos.txt", encoding="utf-8") as f:
     for linea in f:
-        clave, valor = linea.strip().split("=")
-        datos[clave] = valor
+        linea = linea.strip()
+        if not linea:
+            continue
+        clave, valor = linea.split("=", 1)
+        datos[clave.strip()] = valor.strip()
 
 fecha = datetime.now().strftime("%Y-%m-%d")
 
-# Crear PDF
-c = canvas.Canvas("informe.pdf", pagesize=letter)
-
-texto = c.beginText(40, 750)
+c = canvas.Canvas("informe.pdf")
+texto = c.beginText(40, 800)
 texto.setFont("Helvetica", 10)
 
 contenido = f"""
 INFORME TECNICO
 
 Fecha: {fecha}
-Equipo: {datos['equipo']}
-
+Equipo: {datos.get('equipo', 'No especificado')}
 Falla detectada:
-{datos['falla']}
-
+{datos.get('falla', 'No especificado')}
 Acciones realizadas:
-{datos['accion']}
-
+{datos.get('accion', 'No especificado')}
 Estado final:
-{datos['estado']}
+{datos.get('estado', 'No especificado')}
 """
 
-for linea in contenido.split("\n"):
+for linea in contenido.strip().split("\n"):
     texto.textLine(linea)
+
+c.drawText(texto)
+c.save()
+
+print("PDF generado correctamente")
 
 c.drawText(texto)
 c.save()
