@@ -1,4 +1,4 @@
-equipo=TTO6330
-falla=cabezal de impresion
-accion=Ajuste de galgas
-estado=Fuera de lineas de produccion
+equipo=TTO6230
+falla=Tarjeta principal de control
+accion=Mantenimetno de actuador
+estado=Trabajando en lienas de produccion
