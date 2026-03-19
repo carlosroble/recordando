@@ -1,23 +1,30 @@
-name: Generar informe automatico
+# .github/workflows/reporte.yml
 
-on:
-  push:
+name: Generar reporte PDF
+
+on: [push]
 
 jobs:
-  informe:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar repositorio
-        uses: actions/checkout@v4
+      - name: Descargar código
+        uses: actions/checkout@v3
 
-      - name: Instalar dependencias
+      - name: Instalar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Instalar librerías
         run: pip install reportlab
 
-      - name: Ejecutar script Python
-        run: python informe.py
+      - name: Ejecutar script
+        run: python main.py
 
-      - name: Mostrar PDF
-        run: ls
-      - name: Mostrar informe
-        run: cat informe.txt
+      - name: Guardar PDF
+        uses: actions/upload-artifact@v3
+        with:
+          name: reporte
+          path: reporte.pdf
