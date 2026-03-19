@@ -26,6 +26,7 @@ contenido.append(Paragraph("INFORME TÉCNICO", styles['Title']))
 
 # Datos principales
 contenido.append(Paragraph(f"Equipo: {datos['equipo']}", estilo))
+contenido.append(Paragraph(f"Serial: {datos['Serial']}", estilo))
 contenido.append(Paragraph(f"Falla: {datos['falla']}", estilo))
 contenido.append(Paragraph(f"Acción: {datos['accion']}", estilo))
 contenido.append(Paragraph(f"Estado: {datos['estado']}", estilo))
